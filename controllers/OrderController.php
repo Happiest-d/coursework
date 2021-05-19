@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use yii\db\Query;
+use yii\data\Pagination;
+
 /**
  * OrderController implements the CRUD actions for Order model.
  */
@@ -50,6 +53,74 @@ class OrderController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('status', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionWaiting()
+    {
+        $model = new Order();
+        $sql = "SELECT DISTINCT customer.*
+        FROM sem6.`order`, medicine, order_list, customer, sem6.`status`, category
+        WHERE order.id = order_list.order_id
+        AND order.customer_id = customer.id
+        AND order_list.medicine_id = medicine.id
+        AND order.status_id = 2
+        ";
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post()) && !empty($model->find_category)){
+                $query = Yii::$app->db->createCommand($sql . "AND medicine.category_id like '$model->find_category'")->queryAll();
+            } else {
+                $query = Yii::$app->db->createCommand($sql)->queryAll();
+            }
+        } else {
+            $query = Yii::$app->db->createCommand($sql)->queryAll();
+        }
+
+        return $this->render('waiting', [
+            'query' => $query,
+            'model' => $model,
+        ]);
+    }
+
+    //Query 9
+    public function actionPorder()
+    {
+        $model = new Order;
+
+        $sql = "SELECT distinct medicine.*
+        FROM sem6.`order`, medicine, order_list
+        WHERE order_list.order_id = order.id
+        AND order_list.medicine_id = medicine.id
+        ";
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post()) && !empty($model->find_status)){
+                $query = Yii::$app->db->createCommand($sql . "AND order.status_id like '$model->find_status'")->queryAll();
+            } else {
+                $query = Yii::$app->db->createCommand($sql)->queryAll();
+            }
+        } else {
+            $query = Yii::$app->db->createCommand($sql)->queryAll();
+        }
+
+
+        return $this->render('porder', [
+            'model' => $model,
+            'query' => $query,
+            'res' => $model->find_status,
+        ]);
+    }
+
+    
+    public function actionProduction()
+    {
+        $searchModel = new OrderSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('production', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

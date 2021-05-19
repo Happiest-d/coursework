@@ -30,7 +30,10 @@ class Medicine extends \yii\db\ActiveRecord
     {
         return 'medicine';
     }
-
+    public $find_category;
+    public $find_type;
+    public $find_id;
+    public $find_status;
     /**
      * {@inheritdoc}
      */
@@ -38,7 +41,7 @@ class Medicine extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'price', 'in_stock', 'critical_norm', 'category_id', 'type_id'], 'required'],
-            [['price', 'in_stock', 'critical_norm', 'category_id', 'type_id'], 'integer'],
+            [['price', 'in_stock', 'critical_norm', 'category_id', 'type_id','find_category', 'find_type', 'find_id', 'find_status'], 'integer'],
             [['prod_tech'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
@@ -59,7 +62,7 @@ class Medicine extends \yii\db\ActiveRecord
             'critical_norm' => 'Critical Norm',
             'category_id' => 'Category ID',
             'type_id' => 'Type ID',
-            'prod_tech' => 'Prod Tech',
+            'prod_tech' => 'Технология производства',
         ];
     }
 
@@ -88,9 +91,9 @@ class Medicine extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getMedicine-lists()
+    public function getMedicine_lists()
     {
-        return $this->hasMany(Medicine-list::className(), ['medicine_id' => 'id']);
+        return $this->hasMany(Medicine_list::className(), ['medicine_id' => 'id']);
     }
 
     /**
@@ -98,8 +101,8 @@ class Medicine extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getOrder-lists()
+    public function getOrder_lists()
     {
-        return $this->hasMany(Order-list::className(), ['medicine_id' => 'id']);
+        return $this->hasMany(Order_list::className(), ['medicine_id' => 'id']);
     }
 }

@@ -54,8 +54,8 @@ class Component extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getMedicine-lists()
+    public function getMedicineLists()
     {
-        return $this->hasMany(Medicine-list::className(), ['component_id' => 'id']);
+        return $this->hasMany(MedicineList::className(), ['component_id' => 'id']);
     }
 }

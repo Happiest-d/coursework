@@ -30,6 +30,9 @@ class Order extends \yii\db\ActiveRecord
         return 'order';
     }
 
+    public $find_category;
+    public $find_status;
+
     /**
      * {@inheritdoc}
      */
@@ -38,8 +41,8 @@ class Order extends \yii\db\ActiveRecord
         return [
             [['order_accep_date', 'order_issue_date', 'status_id', 'customer_id', 'doctor_id'], 'required'],
             [['order_accep_date', 'order_issue_date'], 'safe'],
-            [['status_id', 'customer_id', 'doctor_id'], 'integer'],
-            [['usage'], 'string'],
+            [['status_id', 'customer_id', 'doctor_id', 'find_status'], 'integer'],
+            [['usage', 'find_category'], 'string'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
             [['doctor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Doctor::className(), 'targetAttribute' => ['doctor_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status_id' => 'id']],
@@ -53,12 +56,12 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_accep_date' => 'Order Accep Date',
-            'order_issue_date' => 'Order Issue Date',
-            'status_id' => 'Status ID',
-            'usage' => 'Usage',
-            'customer_id' => 'Customer ID',
-            'doctor_id' => 'Doctor ID',
+            'order_accep_date' => 'Принят',
+            'order_issue_date' => 'Истекает',
+            'status_id' => 'Статус',
+            'usage' => 'Инструкция',
+            'customer_id' => 'Покупатель',
+            'doctor_id' => 'Доктор',
         ];
     }
 
@@ -100,5 +103,10 @@ class Order extends \yii\db\ActiveRecord
     public function getOrderLists()
     {
         return $this->hasMany(OrderList::className(), ['order_id' => 'id']);
+    }
+
+    public function getMedicine()
+    {
+        return $this->hasMany(Medicine::className(), ['id' => 'medicine_id'])->viaTable('order_list', ['order_id' => 'id']);
     }
 }
