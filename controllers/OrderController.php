@@ -47,6 +47,7 @@ class OrderController extends Controller
         ]);
     }
 
+    //Query 1
     public function actionStatus()
     {
         $searchModel = new OrderSearch();
@@ -58,6 +59,7 @@ class OrderController extends Controller
         ]);
     }
 
+     //Query 2
     public function actionWaiting()
     {
         $model = new Order();
@@ -114,7 +116,7 @@ class OrderController extends Controller
         ]);
     }
 
-    
+    //Query 8
     public function actionProduction()
     {
         $searchModel = new OrderSearch();

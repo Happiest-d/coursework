@@ -45,7 +45,7 @@ class MedicineController extends Controller
         ]);
     }
 
-    //
+    //Query 3
     public function actionOused()
     {
         $model = new Medicine;
