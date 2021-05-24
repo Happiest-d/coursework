@@ -44,7 +44,7 @@ use app\models\Type;
                     <? foreach ($query as $row): ?>
                         <tr>
                             <td><?=$row["name"]?></td>
-                            <td><?=$row["type"]?></td>
+                            <td><?=$row["type"]["name"]?></td>
                         </tr>
                     <? endforeach; ?>
                     </tbody>
@@ -55,6 +55,8 @@ use app\models\Type;
     </div>
 </div>
 
+
+<pre><?= print_r($critical) ?></pre>
 <?//= print_r($query) ?>
 <?//= var_dump(empty($res)) ?>
 <?//= var_dump($res) ?>

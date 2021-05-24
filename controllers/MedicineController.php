@@ -81,59 +81,93 @@ class MedicineController extends Controller
         ]);
     }
 
-    //Query 6
+    //Query 6 ActiveRecord
     public function actionCritical()
     {
         $model = new Medicine;
 
-        $sql = "SELECT medicine.name, type.name AS 'type'
-        FROM medicine, type
-        WHERE medicine.type_id = type.id
-        AND medicine.in_stock <= medicine.critical_norm        
-        ";
 
-        if (Yii::$app->request->isPost) {
-            if ($model->load(Yii::$app->request->post()) && !empty($model->find_type)){
-                $query = Yii::$app->db->createCommand($sql . "AND medicine.type_id like '$model->find_type'")->queryAll();
-            } else {
-                $query = Yii::$app->db->createCommand($sql)->queryAll();
-            }
-        } else {
-            $query = Yii::$app->db->createCommand($sql)->queryAll();
-        }
+        $critical = medicine::find()
+                ->with('type')
+                ->where(['<=', 'in_stock', new \yii\db\Expression("critical_norm")]);
+                //->createCommand()->getRawSql();
+
+                if (Yii::$app->request->isPost) {
+                    if ($model->load(Yii::$app->request->post()) && !empty($model->find_type)){
+                        $query = $critical->andWhere(['like', 'type_id', $model->find_type])->all();
+                    } else {
+                        $query = $critical->all();
+                    }
+                } else {
+                    $query = $critical->all();
+                }
+
+                
+        // $sql = "SELECT medicine.name, type.name AS 'type'
+        // FROM medicine, type
+        // WHERE medicine.type_id = type.id
+        // AND medicine.in_stock <= medicine.critical_norm        
+        // ";
+
+        // if (Yii::$app->request->isPost) {
+        //     if ($model->load(Yii::$app->request->post()) && !empty($model->find_type)){
+        //         $query = Yii::$app->db->createCommand($sql . "AND medicine.type_id like '$model->find_type'")->queryAll();
+        //     } else {
+        //         $query = Yii::$app->db->createCommand($sql)->queryAll();
+        //     }
+        // } else {
+        //     $query = Yii::$app->db->createCommand($sql)->queryAll();
+        // }
 
 
         return $this->render('critical', [
             'model' => $model,
             'query' => $query,
+            'critical' => $critical,
             //'res' => $model->find_type,
         ]);
     }
 
-    //Query 7
+    //Query 7 ActiveRecord
     public function actionMinimum()
     {
         $model = new Medicine;
 
-        $sql = "SELECT *
-        FROM medicine
-        WHERE medicine.in_stock BETWEEN medicine.critical_norm AND (medicine.critical_norm + medicine.critical_norm / 2)
-        ";
+        $med = Medicine::find()
+            ->where(['between', 'in_stock', new \yii\db\Expression("critical_norm"), new \yii\db\Expression("(critical_norm + critical_norm)")]);
+        //createCommand()->getRawSql()
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) && !empty($model->find_category)){
-                $query = Yii::$app->db->createCommand($sql . "AND medicine.category_id like '$model->find_category'")->queryAll();
+                $query = $med->andWhere(['like', 'category_id', $model->find_category])
+                    ->all();
             } else {
-                $query = Yii::$app->db->createCommand($sql)->queryAll();
+                $query = $med->all();
             }
         } else {
-            $query = Yii::$app->db->createCommand($sql)->queryAll();
+            $query = $med->all();
         }
+
+        // $sql = "SELECT *
+        // FROM medicine
+        // WHERE medicine.in_stock BETWEEN medicine.critical_norm AND (medicine.critical_norm + medicine.critical_norm)
+        // ";
+
+        // if (Yii::$app->request->isPost) {
+        //     if ($model->load(Yii::$app->request->post()) && !empty($model->find_category)){
+        //         $query = Yii::$app->db->createCommand($sql . "AND medicine.category_id like '$model->find_category'")->queryAll();
+        //     } else {
+        //         $query = Yii::$app->db->createCommand($sql)->queryAll();
+        //     }
+        // } else {
+        //     $query = Yii::$app->db->createCommand($sql)->queryAll();
+        // }
 
 
         return $this->render('minimum', [
             'model' => $model,
             'query' => $query,
+            // 'med' => $med,
             //'res' => $model->find_type,
         ]);
     }
