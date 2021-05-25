@@ -43,9 +43,9 @@ class Component extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'price' => 'Price',
-            'in_stock' => 'In Stock',
+            'name' => 'Название',
+            'price' => 'Стоимость',
+            'in_stock' => 'В наличии',
         ];
     }
 
