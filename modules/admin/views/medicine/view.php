@@ -35,8 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'in_stock',
             'critical_norm',
-            'category_id',
-            'type_id',
+            [
+                'attribute' => 'category_id',
+                'value' => function ($data) {
+                    return $data->category->name;
+                },
+            ],
+            [
+                'attribute' => 'type_id',
+                'value' => function ($data) {
+                    return $data->type->name;
+                },
+            ],
             'prod_tech:ntext',
             //'counter',
         ],
