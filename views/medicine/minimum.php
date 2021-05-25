@@ -61,8 +61,6 @@ use app\models\Category;
     </div>
 </div>
 
-<pre><?= print_r($med) ?></pre>
-
 <?//= print_r($query) ?>
 <?//= var_dump(empty($res)) ?>
 <?//= var_dump($res) ?>

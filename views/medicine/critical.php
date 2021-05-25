@@ -55,8 +55,6 @@ use app\models\Type;
     </div>
 </div>
 
-
-<pre><?= print_r($critical) ?></pre>
 <?//= print_r($query) ?>
 <?//= var_dump(empty($res)) ?>
 <?//= var_dump($res) ?>
