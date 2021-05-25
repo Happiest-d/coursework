@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\modules\admin\models\DoctorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Doctors';
+$this->title = 'Врачи';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doctor-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Doctor', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать врача', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,9 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
             'patronymic',
             'surname',

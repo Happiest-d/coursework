@@ -42,9 +42,9 @@ class Doctor extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'patronymic' => 'Patronymic',
-            'surname' => 'Surname',
+            'name' => 'Имя',
+            'patronymic' => 'Отчество',
+            'surname' => 'Фамилия',
         ];
     }
 
