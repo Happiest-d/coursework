@@ -48,12 +48,12 @@ class Customer extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'patronymic' => 'Patronymic',
-            'surname' => 'Surname',
-            'age' => 'Age',
-            'phone_num' => 'Phone Num',
-            'address' => 'Address',
+            'name' => 'Имя',
+            'patronymic' => 'Отчество',
+            'surname' => 'Фамилия',
+            'age' => 'Возраст',
+            'phone_num' => 'Телефон',
+            'address' => 'Адрес',
         ];
     }
 
