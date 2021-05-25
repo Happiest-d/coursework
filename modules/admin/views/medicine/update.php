@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\Medicine */
 
 $this->title = 'Обновить лекарство: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Medicines', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Лекарства', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="medicine-update">
 

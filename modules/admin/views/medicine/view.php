@@ -77,8 +77,4 @@ $this->params['breadcrumbs'][] = $this->title;
             <p>Количество компонентов: <?= count($components)?> </p>
         <? endif;?>
 
-
-        
-<pre><?=print_r($components) ?></pre>
-
 </div>
