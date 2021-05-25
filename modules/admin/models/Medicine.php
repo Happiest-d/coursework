@@ -54,14 +54,14 @@ class Medicine extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'price' => 'Price',
-            'in_stock' => 'In Stock',
-            'critical_norm' => 'Critical Norm',
-            'category_id' => 'Category ID',
-            'type_id' => 'Type ID',
-            'prod_tech' => 'Prod Tech',
-            'counter' => 'Counter',
+            'name' => 'Название',
+            'price' => 'Стоимость',
+            'in_stock' => 'В наличии',
+            'critical_norm' => 'Критическая норма',
+            'category_id' => 'Категория',
+            'type_id' => 'Тип',
+            'prod_tech' => 'Технология',
+            'counter' => 'Счётчик',
         ];
     }
 

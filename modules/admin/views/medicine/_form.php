@@ -2,6 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+
+use app\modules\admin\models\Category;
+use app\modules\admin\models\Type;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Medicine */
@@ -19,17 +23,17 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'in_stock')->textInput() ?>
 
     <?= $form->field($model, 'critical_norm')->textInput() ?>
+    
+    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->asArray()->all(),'id','name')) ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'type_id')->dropDownList(ArrayHelper::map(Type::find()->asArray()->all(),'id','name')) ?>
 
-    <?= $form->field($model, 'type_id')->textInput() ?>
+    <?= $form->field($model, 'prod_tech')->textarea(['rows' => 3]) ?>
 
-    <?= $form->field($model, 'prod_tech')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'counter')->textInput() ?>
+    <?//= $form->field($model, 'counter')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

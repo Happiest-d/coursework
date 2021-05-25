@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\admin\models\Medicine */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Medicines', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Лекарства', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Добавить компонент', ['component', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверенны, что хотите удалить данную запись?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
             'name',
             'price',
             'in_stock',
@@ -37,8 +38,37 @@ $this->params['breadcrumbs'][] = $this->title;
             'category_id',
             'type_id',
             'prod_tech:ntext',
-            'counter',
+            //'counter',
         ],
     ]) ?>
+
+    <br>
+    <br>
+    <h3>Компоненты</h3>
+        <? if(count($components) == 0): ?>
+            <h4>Ничего не найдено</h4>
+        <? else: ?>
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Клоичество</th>
+                </tr>
+                </thead>
+                <tbody>
+                <? foreach ($components as $row): ?>
+                    <tr>
+                        <td><?=$row["component"]["name"]?></td>
+                        <td><?=$row["amount"]?></td>
+                    </tr>
+                <? endforeach; ?>
+                </tbody>
+            </table>
+            <p>Количество компонентов: <?= count($components)?> </p>
+        <? endif;?>
+
+
+        
+<pre><?=print_r($components) ?></pre>
 
 </div>

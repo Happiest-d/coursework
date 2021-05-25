@@ -9,6 +9,12 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\modules\admin\models\Category;
+use app\modules\admin\models\Type;
+use app\modules\admin\models\MedicineList;
+use app\modules\admin\models\Component;
+
+
 /**
  * MedicineController implements the CRUD actions for Medicine model.
  */
@@ -52,8 +58,14 @@ class MedicineController extends Controller
      */
     public function actionView($id)
     {
+        $components = MedicineList::find()
+            ->with('component')
+            ->where(['medicine_id' => $id])
+            ->all();
+            
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'components' => $components,
         ]);
     }
 
@@ -67,6 +79,15 @@ class MedicineController extends Controller
         $model = new Medicine();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //перехода на view-компопнет
+            //дропдаун с выбором компонента
+            //добавить компонент - конец
+            //добавить еще один компонент - переход на view-компопнет
+
+            //добавление компонента - из дропдауна выбирается компонент (id)
+            //вводится количество
+            //id лкарства передается в модели
+            //в контроллере добавляется запись
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -74,6 +95,20 @@ class MedicineController extends Controller
             'model' => $model,
         ]);
     }
+    
+    public function actionComponent($id){
+        $model = new MedicineList();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->medicine_id]);
+        }
+
+        return $this->render('component', [
+            'model' => $model,
+            'id' => $id,
+        ]);
+    }
+
 
     /**
      * Updates an existing Medicine model.
