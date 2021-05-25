@@ -2,12 +2,18 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+// use yii\helpers\ArrayHelper;
+
+// use app\modules\admin\models\Status;
+// use app\modules\admin\models\Type;
+// use app\modules\admin\models\Customer;
+// use app\modules\admin\models\Doctor;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Order */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Добавить лекарство', ['medicine', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверенны, что ходите удалить данную запись?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,14 +36,54 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            //'id',
+            [
+                'attribute' => 'customer_id',
+                'value' => function ($data) {
+                    return $data->customer->surname;
+                },
+            ],
+            [
+                'attribute' => 'doctor_id',
+                'value' => function ($data) {
+                    return $data->doctor->surname;
+                },
+            ],
             'order_accep_date',
             'order_issue_date',
-            'status_id',
+            [
+                'attribute' => 'status_id',
+                'value' => function ($data) {
+                    return $data->status->name;
+                },
+            ],
             'usage:ntext',
-            'customer_id',
-            'doctor_id',
         ],
     ]) ?>
+
+    <br>
+    <br>
+    <h3>Лекарства</h3>
+        <? if(count($medicines) == 0): ?>
+            <h4>Ничего не найдено</h4>
+        <? else: ?>
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Клоичество</th>
+                </tr>
+                </thead>
+                <tbody>
+                <? foreach ($medicines as $row): ?>
+                    <tr>
+                        <td><?=$row["medicine"]["name"]?></td>
+                        <td><?=$row["amount"]?></td>
+                    </tr>
+                <? endforeach; ?>
+                </tbody>
+            </table>
+            <p>Количество лекарств: <?= count($medicines)?> </p>
+        <? endif;?>
 
 </div>

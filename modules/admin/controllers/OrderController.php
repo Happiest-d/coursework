@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use app\modules\admin\models\OrderList;
+
 /**
  * OrderController implements the CRUD actions for Order model.
  */
@@ -52,9 +54,31 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
+        $medicines = OrderList::find()
+            ->with('medicine')
+            ->where(['order_id' => $id])
+            ->all();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'medicines' => $medicines,
         ]);
+    }
+
+    public function actionMedicine($id)
+    {
+        $model = new OrderList();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->order_id]);
+        }
+
+        return $this->render('medicine', [
+            'model' => $model,
+            'id' => $id,
+        ]);
+
+        return $this->render('medicine');
     }
 
     /**

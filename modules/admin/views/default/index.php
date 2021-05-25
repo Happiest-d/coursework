@@ -30,7 +30,7 @@ $this->title = 'My Yii Application';
                 <p><?= Html::a('Лекарства', ['medicine/index'], ['class' => 'btn btn-lg btn-primary btn-block']) ?></p>
             </div>
             <div class="col-lg-12">
-                <p><?= Html::a('Заказы', ['order/index'], ['class' => 'btn btn-lg btn-success btn-block']) ?></p>
+                <p><?= Html::a('Заказы', ['order/index'], ['class' => 'btn btn-lg btn-primary btn-block']) ?></p>
             </div>
             <div class="col-lg-12">
                 <p><?= Html::a('Статус заказа', ['status/index'], ['class' => 'btn btn-lg btn-success btn-block']) ?></p>

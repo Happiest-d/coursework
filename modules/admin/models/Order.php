@@ -37,7 +37,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['order_accep_date', 'order_issue_date', 'status_id', 'customer_id', 'doctor_id'], 'required'],
-            [['order_accep_date', 'order_issue_date'], 'safe'],
+            [['order_accep_date', 'order_issue_date'], 'date', 'format' => 'php:Y-m-d', 'message' => 'Введите дату в формате гггг-мм-дд'],
             [['status_id', 'customer_id', 'doctor_id'], 'integer'],
             [['usage'], 'string'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
@@ -53,12 +53,12 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_accep_date' => 'Order Accep Date',
-            'order_issue_date' => 'Order Issue Date',
-            'status_id' => 'Status ID',
-            'usage' => 'Usage',
-            'customer_id' => 'Customer ID',
-            'doctor_id' => 'Doctor ID',
+            'order_accep_date' => 'Заказ приянт',
+            'order_issue_date' => 'Заказ истекает',
+            'status_id' => 'Статус',
+            'usage' => 'Инструкция',
+            'customer_id' => 'Клиент',
+            'doctor_id' => 'Доктор',
         ];
     }
 
