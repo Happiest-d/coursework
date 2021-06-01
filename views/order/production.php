@@ -5,6 +5,8 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 
 use app\models\Status;
+use app\models\Customer;
+use app\models\Doctor;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\OrderSearch */
@@ -25,13 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
-            //'order_accep_date',
-            //'order_issue_date',
-            //'status_id',
-            //'usage:ntext',
-            //'customer_id',
-            //'doctor_id',
             [
                 'attribute' => 'status_id',
                 'value' => function ($data) {
@@ -48,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($data) {
                     return $data->customer->surname;
                 },
+                'filter' => ArrayHelper::map(Customer::find()->asArray()->all(),'id','surname'),
                 'label' => 'Покупатель',
             ],
             [
@@ -55,7 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($data) {
                     return $data->doctor->surname;
                 },
-                'label' => 'Покупатель',
+                'filter' => ArrayHelper::map(Doctor::find()->asArray()->all(),'id','surname'),
+                'label' => 'Доктор',
             ],
 
             //['class' => 'yii\grid\ActionColumn'],

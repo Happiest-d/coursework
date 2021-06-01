@@ -30,13 +30,13 @@ $this->title = 'My Yii Application';
                 <p><?= Html::a('Определенное лекарство с по (5)', ['medicine/order'], ['class' => 'btn btn-lg btn-success btn-block']) ?></p>
             </div>
             <div class="col-lg-12">
-                <p><?= Html::a('Критическая норма  AR(6)', ['medicine/critical'], ['class' => 'btn btn-lg btn-primary btn-block']) ?></p>
+                <p><?= Html::a('Критическая норма  AR(6)', ['medicine/critical'], ['class' => 'btn btn-lg btn-success btn-block']) ?></p>
             </div>
             <div class="col-lg-12">
-                <p><?= Html::a('Минимум на складе AR(7)', ['medicine/minimum'], ['class' => 'btn btn-lg btn-primary btn-block']) ?></p>
+                <p><?= Html::a('Минимум на складе AR(7)', ['medicine/minimum'], ['class' => 'btn btn-lg btn-success btn-block']) ?></p>
             </div>
             <div class="col-lg-12">
-                <p><?= Html::a('Заказы в производстве (8)', ['order/production'], ['class' => 'btn btn-lg btn-success btn-block']) ?></p>
+                <p><?= Html::a('Заказы в производстве DataProvider(8)', ['order/production'], ['class' => 'btn btn-lg btn-primary btn-block']) ?></p>
             </div>
             <div class="col-lg-12">
                 <p><?= Html::a('Перечень медикаментов для заказов (9)', ['order/porder'], ['class' => 'btn btn-lg btn-success btn-block']) ?></p>
