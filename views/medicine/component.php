@@ -62,7 +62,7 @@ use app\models\Medicine;
                     <? endforeach; ?>
                     </tbody>
                 </table>
-                <p>Количество компонентов: <?= count($query)?> </p>
+                <?= app\components\Counter::widget(['array'=> $query]) ?>
             <? endif;?>
         </div>
     </div>

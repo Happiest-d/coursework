@@ -49,7 +49,7 @@ use app\models\Type;
                     <? endforeach; ?>
                     </tbody>
                 </table>
-                <p>Количество записей: <?= count($query)?> </p>
+                <?= app\components\Counter::widget(['array'=> $query]) ?>
             <? endif;?>
         </div>
     </div>

@@ -56,13 +56,12 @@ use app\models\Status;
                     <? endforeach; ?>
                     </tbody>
                 </table>
-                <p>Количество записей: <?= count($query)?> </p>
+                <?= app\components\Counter::widget(['array'=> $query]) ?>
             <? endif;?>
         </div>
     </div>
 </div>
 
-<pre><?= print_r($res) ?></pre>
 <?//= print_r($query) ?>
 <?//= var_dump(empty($res)) ?>
 <?//= var_dump($res) ?>

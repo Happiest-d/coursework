@@ -58,7 +58,7 @@ use app\models\Category;
                     <? endforeach; ?>
                     </tbody>
                 </table>
-                <p>Количество записей: <?= count($query)?> </p>
+                <?= app\components\Counter::widget(['array'=> $query]) ?>
             <? endif;?>
         </div>
     </div>
