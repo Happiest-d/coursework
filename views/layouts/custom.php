@@ -39,7 +39,7 @@ AppAsset::register($this);
                     <ul class="nav-menu">
                         <li><?= Html::a('Queries', ['/'])?></li>
                         <li><?= Html::a('Admin pannel', ['/admin/default/index'])?></li>
-                        <li><?= Html::a('Users', ['/rbac/default/index'])?></li>
+                        <li><?//= Html::a('Users', ['/rbac/default/index'])?></li>
                         <? if(Yii::$app->user->isGuest):?>
                                 <li><a href="/rbac/user/login">Login</a></li>
                         <? endif; ?>
@@ -78,6 +78,10 @@ AppAsset::register($this);
 
                     .wrap-table thead{
                         color:white;
+                    }
+
+                    .wrap-table h4{
+                        color: white;
                     }
 
                     .table tbody{
