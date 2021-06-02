@@ -5,12 +5,8 @@ use yii\helpers\Html;
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <p>Запорсы 1 - 13</p> 
-    </div>
-
+<div class="container">
+    <h1 style="margin: 2em 1em">Запросы 1 -13</h1>
     <div class="body-content">
 
         <div class="row">
@@ -54,6 +50,5 @@ $this->title = 'My Yii Application';
                 <p><?= Html::a('Информация о медикаменте (13)', ['medicine/info'], ['class' => 'btn btn-lg btn-success btn-block']) ?></p>
             </div>
         </div>
-
     </div>
 </div>

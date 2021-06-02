@@ -5,12 +5,8 @@ use yii\helpers\Html;
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <p>CRUD</p> 
-    </div>
-
+<div class="container">
+    <h1 style="margin: 2em 1em">CRUD</h1>
     <div class="body-content">
 
         <div class="row">
