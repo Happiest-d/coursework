@@ -12,67 +12,71 @@ use app\models\Type;
 use app\models\Medicine;
 ?>
 
-<div class="row">
-        <div col="12">
-            <h1>Вся информация о медикаменте</h1>
-        </div>
-    </div>
+<div class="container content">
     <div class="row">
-        <?php $form = ActiveForm::begin(); ?>
-        
-        <?= $form->field($model, 'find_id')->dropDownList(ArrayHelper::map(Medicine::find()->asArray()->all(),'id','name'), ['prompt' => 'Выберите медикамент из списка'])->label('Выбрать медикамент:')?>
+            <div col="12">
+                <h1>Вся информация о медикаменте</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="filter-form">
+                <?php $form = ActiveForm::begin(); ?>
+                
+                <?= $form->field($model, 'find_id')->dropDownList(ArrayHelper::map(Medicine::find()->asArray()->all(),'id','name'), ['prompt' => 'Выберите медикамент из списка'])->label('Выбрать медикамент:')?>
 
-        <?= Html::submitButton('Получить', ['class' => 'btn btn-primary', 'name' => 'filter-button']) ?>
-        
-        <?php ActiveForm::end(); ?>
-    </div>  
-    <br>
-    <br>
-    <div class="row wrap-table">
-        <div class="col-12">
-            <? if(count($query) == 0): ?>
-                <h4>Ничего не найдено</h4>
-            <? else: ?>
-                <table class="table table-striped">
-                    <tbody>
+                <?= Html::submitButton('Получить', ['class' => 'btn btn-primary', 'name' => 'filter-button']) ?>
+                
+                <?php ActiveForm::end(); ?>
+            </div>
+        </div>  
+        <br>
+        <br>
+        <div class="row wrap-table">
+            <div class="col-12">
+                <? if(count($query) == 0): ?>
+                    <h4>Ничего не найдено</h4>
+                <? else: ?>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Название</td><td><?=$query['0']["name"]?></td>
+                            </tr>
+                            <tr>
+                                <td>Цена</td><td><?=$query['0']["price"]?></td>
+                            </tr>
+                            <tr>
+                                <td>На складе</td><td><?=$query['0']["in_stock"]?></td>
+                            </tr>
+                            <tr>
+                                <td>Технология производства</td><td><?=$query['0']["prod_tech"]?></td>
+                            </tr>
+                            <tr>
+                                <td>Тип</td><td><?=$query['0']["type"]?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h1>Компоненты</h1>
+                    <table class="table table-striped">
+                    <thead>
                         <tr>
-                            <td>Название</td><td><?=$query['0']["name"]?></td>
+                            <th scope="col">Название</th>
+                            <th scope="col">Цена</th>
+                            <th scope="col">На складе</th>
                         </tr>
-                        <tr>
-                            <td>Цена</td><td><?=$query['0']["price"]?></td>
-                        </tr>
-                        <tr>
-                            <td>На складе</td><td><?=$query['0']["in_stock"]?></td>
-                        </tr>
-                        <tr>
-                            <td>Технология производства</td><td><?=$query['0']["prod_tech"]?></td>
-                        </tr>
-                        <tr>
-                            <td>Тип</td><td><?=$query['0']["type"]?></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <h1>Компоненты</h1>
-                <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Название</th>
-                        <th scope="col">Цена</th>
-                        <th scope="col">На складе</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <? foreach ($query as $row): ?>
-                        <tr>
-                            <td><?=$row["c_name"]?></td>
-                            <td><?=$row["c_price"]?></td>
-                            <td><?=$row["c_stock"]?></td>
-                        </tr>
-                    <? endforeach; ?>
-                    </tbody>
-                </table>
-                <?= app\components\Counter::widget(['array'=> $query]) ?>
-            <? endif;?>
+                        </thead>
+                        <tbody>
+                        <? foreach ($query as $row): ?>
+                            <tr>
+                                <td><?=$row["c_name"]?></td>
+                                <td><?=$row["c_price"]?></td>
+                                <td><?=$row["c_stock"]?></td>
+                            </tr>
+                        <? endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?= app\components\Counter::widget(['array'=> $query]) ?>
+                <? endif;?>
+            </div>
         </div>
     </div>
 </div>

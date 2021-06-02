@@ -12,51 +12,54 @@ use app\models\Type;
  use app\models\Medicine;
 ?>
 
-<div class="row">
-        <div col="12">
-            <h1>Технологии приготовления лекарств</h1>
-        </div>
-    </div>
+<div class="container content">
     <div class="row">
-        <?php $form = ActiveForm::begin(); ?>
+            <div col="12">
+                <h1>Технологии приготовления лекарств</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="filter-form">
+                <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'find_type')->dropDownList(ArrayHelper::map(Type::find()->asArray()->all(),'id','name'), ['prompt' => 'Все'])->label('Тип медикаментов:')?>
+                <?= $form->field($model, 'find_type')->dropDownList(ArrayHelper::map(Type::find()->asArray()->all(),'id','name'), ['prompt' => 'Все'])->label('Тип медикаментов:')?>
 
-        <?= $form->field($model, 'find_id')->dropDownList(ArrayHelper::map(Medicine::find()->asArray()->all(),'id','name'), ['prompt' => 'Все'])->label('Медикамент:')?>
-        
-        <?= Html::submitButton('Получить', ['class' => 'btn btn-primary', 'name' => 'filter-button']) ?>
-        
-        <?php ActiveForm::end(); ?>
-    </div>  
-    <br>
-    <br>
-    <div class="row wrap-table">
-        <div class="col-12">
-            <? if(count($query) == 0): ?>
-                <h4>Ничего не найдено</h4>
-            <? else: ?>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Название</th>
-                        <th scope="col">Технология</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <? foreach ($query as $row): ?>
+                <?= $form->field($model, 'find_id')->dropDownList(ArrayHelper::map(Medicine::find()->asArray()->all(),'id','name'), ['prompt' => 'Все'])->label('Медикамент:')?>
+                
+                <?= Html::submitButton('Получить', ['class' => 'btn btn-primary', 'name' => 'filter-button']) ?>
+                
+                <?php ActiveForm::end(); ?>
+            </div>
+        </div>  
+        <br>
+        <br>
+        <div class="row wrap-table">
+            <div class="col-12">
+                <? if(count($query) == 0): ?>
+                    <h4>Ничего не найдено</h4>
+                <? else: ?>
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
-                            <td><?=$row["name"]?></td>
-                            <td><?=$row["prod_tech"]?></td>
+                            <th scope="col">Название</th>
+                            <th scope="col">Технология</th>
                         </tr>
-                    <? endforeach; ?>
-                    </tbody>
-                </table>
-                <?= app\components\Counter::widget(['array'=> $query]) ?>
-            <? endif;?>
+                        </thead>
+                        <tbody>
+                        <? foreach ($query as $row): ?>
+                            <tr>
+                                <td><?=$row["name"]?></td>
+                                <td><?=$row["prod_tech"]?></td>
+                            </tr>
+                        <? endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?= app\components\Counter::widget(['array'=> $query]) ?>
+                <? endif;?>
+            </div>
         </div>
     </div>
 </div>
-
 
 <?//= print_r($query) ?>
 <?//= var_dump(empty($res)) ?>

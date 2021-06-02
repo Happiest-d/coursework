@@ -12,19 +12,22 @@ use app\models\Category;
 // use app\models\Medicine;
 ?>
 
-<div class="row">
+<div class="container content">
+    <div class="row">
         <div col="12">
             <h1>Лекарства с минимальным запасом на складе</h1>
         </div>
     </div>
     <div class="row">
-        <?php $form = ActiveForm::begin(); ?>
+        <div class="filter-form">
+            <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'find_category')->dropDownList(ArrayHelper::map(Category::find()->asArray()->all(),'id','name'), ['prompt' => 'Все'])->label('Тип медикаментов:')?>
-        
-        <?= Html::submitButton('Получить', ['class' => 'btn btn-primary', 'name' => 'filter-button']) ?>
-        
-        <?php ActiveForm::end(); ?>
+            <?= $form->field($model, 'find_category')->dropDownList(ArrayHelper::map(Category::find()->asArray()->all(),'id','name'), ['prompt' => 'Все'])->label('Тип медикаментов:')?>
+            
+            <?= Html::submitButton('Получить', ['class' => 'btn btn-primary', 'name' => 'filter-button']) ?>
+            
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>  
     <br>
     <br>
@@ -60,6 +63,7 @@ use app\models\Category;
         </div>
     </div>
 </div>
+
 
 <?//= print_r($query) ?>
 <?//= var_dump(empty($res)) ?>

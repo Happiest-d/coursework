@@ -12,45 +12,49 @@ use app\models\Type;
 // use app\models\Medicine;
 ?>
 
-<div class="row">
-        <div col="12">
-            <h1>Лекарства, достигшие своей критической нормы или закончившиеся</h1>
-        </div>
-    </div>
+<div class="container content">
     <div class="row">
-        <?php $form = ActiveForm::begin(); ?>
+            <div col="12">
+                <h1>Лекарства, достигшие своей критической нормы или закончившиеся</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="filter-form">
+                <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'find_type')->dropDownList(ArrayHelper::map(Type::find()->asArray()->all(),'id','name'), ['prompt' => 'Все'])->label('Тип медикаментов:')?>
-        
-        <?= Html::submitButton('Получить', ['class' => 'btn btn-primary', 'name' => 'filter-button']) ?>
-        
-        <?php ActiveForm::end(); ?>
-    </div>  
-    <br>
-    <br>
-    <div class="row wrap-table">
-        <div class="col-12">
-            <? if(count($query) == 0): ?>
-                <h4>Ничего не найдено</h4>
-            <? else: ?>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">Препарат</th>
-                        <th scope="col">Тип</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <? foreach ($query as $row): ?>
+                <?= $form->field($model, 'find_type')->dropDownList(ArrayHelper::map(Type::find()->asArray()->all(),'id','name'), ['prompt' => 'Все'])->label('Тип медикаментов:')?>
+                
+                <?= Html::submitButton('Получить', ['class' => 'btn btn-primary', 'name' => 'filter-button']) ?>
+                
+                <?php ActiveForm::end(); ?>
+            </div>
+        </div>  
+        <br>
+        <br>
+        <div class="row wrap-table">
+            <div class="col-12">
+                <? if(count($query) == 0): ?>
+                    <h4>Ничего не найдено</h4>
+                <? else: ?>
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
-                            <td><?=$row["name"]?></td>
-                            <td><?=$row["type"]["name"]?></td>
+                            <th scope="col">Препарат</th>
+                            <th scope="col">Тип</th>
                         </tr>
-                    <? endforeach; ?>
-                    </tbody>
-                </table>
-                <?= app\components\Counter::widget(['array'=> $query]) ?>
-            <? endif;?>
+                        </thead>
+                        <tbody>
+                        <? foreach ($query as $row): ?>
+                            <tr>
+                                <td><?=$row["name"]?></td>
+                                <td><?=$row["type"]["name"]?></td>
+                            </tr>
+                        <? endforeach; ?>
+                        </tbody>
+                    </table>
+                    <?= app\components\Counter::widget(['array'=> $query]) ?>
+                <? endif;?>
+            </div>
         </div>
     </div>
 </div>
