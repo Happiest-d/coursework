@@ -32,7 +32,7 @@ AppAsset::register($this);
             <div class="container">
 
                 <div id="logo" class="pull-left">
-                    <a href="/">Coursework</a>
+                    <h1><a href="/">Coursework</a></h1>
                 </div>
 
                 <nav id="nav-menu-container">
