@@ -88,6 +88,10 @@ AppAsset::register($this);
                         background: white;
                         text-align: left;
                     }
+
+                    .table thead a{
+                        color:white;
+                    }
                 </style>
                 <?= Alert::widget() ?>
                 <?= $content ?>
