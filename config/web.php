@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'layout' => 'custom',
     'name' => 'Coursework',
     'language' => 'ru',
     'basePath' => dirname(__DIR__),
